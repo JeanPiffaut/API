@@ -4,7 +4,7 @@ namespace Library;
 
 abstract class Structure
 {
-    private array|false $errors;
+    private array|false $errors = false;
 
     /**
      * Returns the errors that were generated in the process.

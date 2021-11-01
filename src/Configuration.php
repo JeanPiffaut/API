@@ -2,8 +2,6 @@
 
 namespace Library;
 
-use Library\Structure;
-
 class Configuration extends Structure
 {
     /**
