@@ -1,5 +1,8 @@
 {
   "project": {
     "name": "API"
+  },
+  "documentation": {
+    "link": "http://localhost:8888/API/"
   }
 }
