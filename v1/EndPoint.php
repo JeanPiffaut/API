@@ -2,26 +2,76 @@
 
 include_once dirname(__DIR__) . "/v1/endpoint_result.php";
 
- class EndPoint
+class EndPoint
 {
+    protected endpoint_result $result;
+
+    /**
+     * Allows to obtain information from the endpoint called
+     * @return endpoint_result
+     */
     public function get(): endpoint_result
     {
-        return $this->setResult(405);
+        $this->setResult(405);
+        return $this->getResult();
     }
 
+    /**
+     * Create elements in the endpoint called
+     * @return endpoint_result
+     */
+    public function post(): endpoint_result
+    {
+        $this->setResult(405);
+        return $this->getResult();
+    }
+
+    /**
+     * Update or replace items on the endpoint named
+     * @return endpoint_result
+     */
     public function put(): endpoint_result
     {
-        return $this->setResult(405);
+        $this->setResult(405);
+        return $this->getResult();
     }
 
+    /**
+     * Updates or modifies items on the endpoint called
+     * @return endpoint_result
+     */
+    public function patch(): endpoint_result
+    {
+        $this->setResult(405);
+        return $this->getResult();
+    }
+
+    /**
+     * Deletes items at the endpoint called
+     * @return endpoint_result
+     */
     public function delete(): endpoint_result
     {
-        return $this->setResult(405);
+        $this->setResult(405);
+        return $this->getResult();
     }
 
-    protected function setResult($code): endpoint_result
+    /**
+     * Configures the result that will be obtained from the endpoint.
+     * @param $code
+     */
+    protected function setResult($code): void
     {
         $result = new endpoint_result($code);
-        return $result;
+        $this->result = $result;
+    }
+
+    /**
+     * Returns the result object of the endpoint
+     * @return endpoint_result
+     */
+    public function getResult(): endpoint_result
+    {
+        return $this->result;
     }
 }

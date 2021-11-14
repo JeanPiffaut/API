@@ -9,4 +9,3 @@ include_once dirname(__DIR__) . "/v1/EndPoint.php";
 $end = new EndPoint();
 
 print json_encode($end->get());
-
