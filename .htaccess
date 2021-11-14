@@ -1,3 +1,0 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)/(.*)$ %{ENV:BASE}project/$1/index.php?version=$1&end_point=$2 [QSA,L]
