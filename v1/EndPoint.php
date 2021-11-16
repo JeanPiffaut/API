@@ -59,6 +59,7 @@ class EndPoint
     /**
      * Configures the result that will be obtained from the endpoint.
      * @param $code
+     * @param array $contents
      */
     protected function setResult($code, array $contents = array()): void
     {
@@ -75,7 +76,7 @@ class EndPoint
      * Returns the result object of the endpoint
      * @return endpoint_result
      */
-    public function getResult(): endpoint_result
+    protected function getResult(): endpoint_result
     {
         return $this->result;
     }
