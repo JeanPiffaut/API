@@ -2,9 +2,58 @@
 
 class endpoint_result
 {
+    public endpoint_header $header;
+    public endpoint_request|array  $request = [];
+
+    public function __construct($code)
+    {
+        $this->setHeader($code);
+    }
+
+    /**
+     * @return endpoint_header
+     */
+    public function getHeader(): endpoint_header
+    {
+        return $this->header;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setHeader(string $code): void
+    {
+        $this->header = new endpoint_header($code);
+    }
+
+    /**
+     * @return endpoint_request
+     */
+    public function getRequest(): endpoint_request
+    {
+        return $this->request;
+    }
+
+    /**
+     * @param $key
+     * @param $sub_key
+     */
+    public function setRequest($key, $sub_key): void
+    {
+        if(is_array($this->request) === true) {
+
+            $this->request = new endpoint_request();
+        }
+
+        $this->request->setContent($key, $sub_key);
+    }
+}
+
+
+class endpoint_header
+{
     public int    $code;
     public string $message;
-    public array  $request;
     private array $codes = [
         200 => "Ok",
         201 => "Created",
@@ -33,7 +82,7 @@ class endpoint_result
     /**
      * @param int $code
      */
-    private function setCode(int $code): void
+    public function setCode(int $code): void
     {
         $this->code = $code;
     }
@@ -49,24 +98,20 @@ class endpoint_result
     /**
      * @param string $message
      */
-    private function setMessage(string $message): void
+    public function setMessage(string $message): void
     {
         $this->message = $message;
     }
+}
 
+class endpoint_request
+{
     /**
-     * @return array
+     * @param string $key
+     * @param mixed $sub_key
      */
-    public function getRequest(): array
+    public function setContent(string $key, mixed $sub_key): void
     {
-        return $this->request;
-    }
-
-    /**
-     * @param array $request
-     */
-    public function setRequest(array $request): void
-    {
-        $this->request = $request;
+        $this->$key = $sub_key;
     }
 }
