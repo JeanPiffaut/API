@@ -11,27 +11,11 @@ class endpoint_result
     }
 
     /**
-     * @return endpoint_header
-     */
-    public function getHeader(): endpoint_header
-    {
-        return $this->header;
-    }
-
-    /**
      * @param string $code
      */
     public function setHeader(string $code): void
     {
         $this->header = new endpoint_header($code);
-    }
-
-    /**
-     * @return endpoint_request
-     */
-    public function getRequest(): endpoint_request
-    {
-        return $this->request;
     }
 
     /**
@@ -68,15 +52,7 @@ class endpoint_header
     public function __construct(int $code)
     {
         $this->setCode($code);
-        $this->setMessage($this->codes[$this->getCode()]);
-    }
-
-    /**
-     * @return int
-     */
-    public function getCode(): int
-    {
-        return $this->code;
+        $this->setMessage($this->codes[$this->code]);
     }
 
     /**
@@ -85,14 +61,6 @@ class endpoint_header
     public function setCode(int $code): void
     {
         $this->code = $code;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage(): string
-    {
-        return $this->message;
     }
 
     /**

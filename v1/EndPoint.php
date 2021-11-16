@@ -60,10 +60,15 @@ class EndPoint
      * Configures the result that will be obtained from the endpoint.
      * @param $code
      */
-    protected function setResult($code): void
+    protected function setResult($code, array $contents = array()): void
     {
         $result = new endpoint_result($code);
         $this->result = $result;
+
+        foreach ($contents as $key => $content) {
+
+            $this->result->setRequest($key, $content);
+        }
     }
 
     /**
