@@ -4,11 +4,9 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE");
 header("Access-Control-Max-Age: 3600");
 
-$service = $_REQUEST['service'];
+include_once dirname(__DIR__) . "/v1/product.php";
 
-include_once dirname(__DIR__) . "/v2/" . $service . ".php";
-
-$product = new $service();
+$product = new product();
 
 switch ($_SERVER['REQUEST_METHOD'])
 {
