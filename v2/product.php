@@ -1,6 +1,6 @@
 <?php
 
-include_once dirname(__DIR__) . "/v2/src/EndPoint.php";
+include_once dirname(__DIR__) . "/v1/src/EndPoint.php";
 
 class product extends EndPoint
 {
