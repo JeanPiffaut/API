@@ -1,8 +1,8 @@
 <?php
 
-include_once dirname(__DIR__) . "/v1/endpoint_result.php";
+include_once dirname(__DIR__) . "/src/endpoint_result.php";
 
-class EndPoint
+abstract class EndPoint
 {
     protected endpoint_result $result;
 
