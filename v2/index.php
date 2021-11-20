@@ -4,33 +4,24 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE");
 header("Access-Control-Max-Age: 3600");
 
-$service = $_REQUEST['service'];
+if(isset($_REQUEST['service']) && $_REQUEST['service'] != "") {
+
+    $service = $_REQUEST['service'];
+} else {
+
+    $service = "product";
+}
 
 include_once dirname(__DIR__) . "/v2/" . $service . ".php";
 
 $product = new $service();
+$product->setParams($_REQUEST);
 
-switch ($_SERVER['REQUEST_METHOD'])
-{
-    case "POST":
+$result = match ($_SERVER['REQUEST_METHOD']) {
+    "POST" => $product->post(),
+    "PUT" => $product->put(),
+    "PATCH" => $product->patch(),
+    default => $product->get(),
+};
 
-        $result = $product->post();
-        break;
-
-    case "PUT":
-
-        $result = $product->put();
-        break;
-
-    case "PATCH":
-
-        $result = $product->patch();
-        break;
-    default:
-
-        $result = $product->get();
-        break;
-}
-
-
-print json_encode($result);
+print json_encode($product);
