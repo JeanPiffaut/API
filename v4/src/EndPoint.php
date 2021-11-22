@@ -2,6 +2,8 @@
 
 namespace Directory;
 
+include_once __DIR__ . "/endpoint_result.php";
+
 use endpoint_result;
 
 abstract class EndPoint
@@ -12,7 +14,7 @@ abstract class EndPoint
     {
         foreach ($params as $key => $value) {
 
-            if(property_exists($this, $key)) {
+            if(property_exists($this, $key) === true) {
 
                 $this->$key = $value;
             }

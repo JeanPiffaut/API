@@ -8,12 +8,12 @@ include_once __DIR__ . "/src/autoload.php";
 global $CONFIG;
 
 // Configure API access methods
-header("Access-Control-Allow-Methods: " . implode($CONFIG['access']['methods']));
+//header("Access-Control-Allow-Methods: " . implode($CONFIG['access']['methods']));
 
 // Validates if the called endpoint was sent.
-if(isset($_REQUEST['service']) && $_REQUEST['service'] != "") {
+if(isset($_GET['service']) && $_GET['service'] != "") {
 
-    $service = $_REQUEST['service'];
+    $service = $_GET['service'];
 } else {
 
     $service = $CONFIG['project']['default_page'];
@@ -41,7 +41,7 @@ $result = match ($_SERVER['REQUEST_METHOD']) {
     "PUT" =>    $endpoint_obj->put(),
     "PATCH" =>  $endpoint_obj->patch(),
     "DELETE" => $endpoint_obj->detele(),
-    default =>  $endpoint_obj->get(),
+    default =>  $endpoint_obj->get()
 };
 
 // Returns the result object and prints it in JSON format

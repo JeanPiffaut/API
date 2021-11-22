@@ -1,0 +1,25 @@
+PATCH http://localhost:8888/API/v4/
+Content-Type: application/json
+
+{
+  "poto": "laskdjasd"
+}
+###
+PUT http://localhost:8888/API/v4/
+Content-Type: application/json
+
+{
+  "poto": "laskdjasd"
+}
+###
+POST http://localhost:8888/API/v4/product?poto=asd
+Content-Type: application/json
+
+{
+  "poto": "laskdjasd"
+}
+###
+GET http://localhost:8888/API/v4/?poto=asdasd
+Accept: application/json
+
+###

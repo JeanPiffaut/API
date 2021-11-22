@@ -11,6 +11,12 @@ class product extends EndPoint
      */
     public function post(): endpoint_result
     {
+        $this->setResult(200, array("ads" => $this->poto));
+        return $this->getResult();
+    }
+
+    public function get(): endpoint_result
+    {
         $this->setResult(200);
         return $this->getResult();
     }
