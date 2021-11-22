@@ -3,15 +3,12 @@
 // Set the page content as JSON and UTF-8
 header("Content-Type: application/json; charset=UTF-8");
 
-// Add the configuration file
-include_once __DIR__ . "/src/config.php";
+// Add the autoload file
+include_once __DIR__ . "/src/autoload.php";
 global $CONFIG;
 
 // Configure API access methods
 header("Access-Control-Allow-Methods: " . implode($CONFIG['access']['methods']));
-
-// Add the COMPOSER autoload file
-include_once __DIR__ . "/src/composer/vendor/autoload.php";
 
 // Validates if the called endpoint was sent.
 if(isset($_REQUEST['service']) && $_REQUEST['service'] != "") {
