@@ -6,7 +6,7 @@ include_once __DIR__ . "/endpoint_result.php";
 
 use endpoint_result;
 
-abstract class EndPoint
+abstract class EndPoint implements iEndPoint
 {
     protected endpoint_result $result;
 
@@ -16,7 +16,7 @@ abstract class EndPoint
 
             if(property_exists($this, $key) === true) {
 
-                $this->$key = $value;
+                $this->setEndPointParams($key, $value);
             }
         }
     }
@@ -95,4 +95,9 @@ abstract class EndPoint
     {
         return $this->result;
     }
+}
+
+interface iEndPoint
+{
+    public function setEndPointParams(string $name, mixed $value);
 }

@@ -14,7 +14,32 @@ class home extends EndPoint
 
     public function post(): endpoint_result
     {
-        $this->setResult(200, array("poto" => $this->poto));
+        $this->setResult(200);
         return $this->getResult();
+    }
+
+    public function setEndPointParams(string $name, mixed $value)
+    {
+        switch ($name) {
+            case "poto":
+                $this->setPoto($value);
+                break;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getPoto(): string
+    {
+        return $this->poto;
+    }
+
+    /**
+     * @param string $poto
+     */
+    public function setPoto(string $poto): void
+    {
+        $this->poto = $poto;
     }
 }
