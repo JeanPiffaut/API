@@ -1,8 +1,12 @@
 <?php
 
-include_once dirname(__DIR__) . "/src/endpoint_result.php";
+namespace Directory;
 
-abstract class EndPoint
+include_once __DIR__ . "/endpoint_result.php";
+
+use endpoint_result;
+
+abstract class EndPoint implements iEndPoint
 {
     protected endpoint_result $result;
 
@@ -10,7 +14,10 @@ abstract class EndPoint
     {
         foreach ($params as $key => $value) {
 
-            $this->$key = $value;
+            if(property_exists($this, $key) === true) {
+
+                $this->setEndPointParams($key, $value);
+            }
         }
     }
 
@@ -88,4 +95,9 @@ abstract class EndPoint
     {
         return $this->result;
     }
+}
+
+interface iEndPoint
+{
+    public function setEndPointParams(string $name, mixed $value): void;
 }
