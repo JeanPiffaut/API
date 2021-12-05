@@ -6,7 +6,7 @@ class product extends EndPoint
 {
     public string $name;
 
-    public function setEndPointParams(string $name, mixed $value)
+    public function setEndPointParams(string $name, mixed $value): void
     {
         switch ($name) {
             case "name":

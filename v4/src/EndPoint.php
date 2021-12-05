@@ -99,5 +99,5 @@ abstract class EndPoint implements iEndPoint
 
 interface iEndPoint
 {
-    public function setEndPointParams(string $name, mixed $value);
+    public function setEndPointParams(string $name, mixed $value): void;
 }

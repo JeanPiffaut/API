@@ -8,7 +8,7 @@ include_once __DIR__ . "/src/autoload.php";
 global $CONFIG;
 
 // Configure API access methods
-//header("Access-Control-Allow-Methods: " . implode($CONFIG['access']['methods']));
+header("Access-Control-Allow-Methods: " . implode($CONFIG['access']['methods']));
 
 // Validates if the called endpoint was sent.
 if(isset($_GET['service']) && $_GET['service'] != "") {

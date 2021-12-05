@@ -18,7 +18,7 @@ class home extends EndPoint
         return $this->getResult();
     }
 
-    public function setEndPointParams(string $name, mixed $value)
+    public function setEndPointParams(string $name, mixed $value): void
     {
         switch ($name) {
             case "poto":
