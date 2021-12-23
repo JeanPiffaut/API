@@ -24,7 +24,6 @@ function api_error_handler(int $number, string $message, string|null $file = nul
     return true;
 }
 
-
 class Error_Handler
 {
     private int $number;

@@ -66,6 +66,14 @@ class endpoint_result
             $HANDLER_ERROR = array();
         }
     }
+
+    public function setHandlerResult()
+    {
+        global $HANDLER_ERROR;
+        $this->errors = $HANDLER_ERROR;
+
+        unset($HANDLER_ERROR);
+    }
 }
 
 
