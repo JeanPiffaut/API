@@ -7,6 +7,15 @@ use endpoint_result;
 global $HANDLER_ERROR;
 $HANDLER_ERROR = array();
 
+/**
+ * Function in charge of generating and applying the error to be displayed according to what the system requires.
+ * @param int $number
+ * @param string $message
+ * @param string|null $file
+ * @param int|null $line
+ * @param array|null $context
+ * @return bool
+ */
 function api_error_handler(int $number, string $message, string|null $file = null, int|null $line = null, array|null $context = null): bool
 {
     $handler = new Error_Handler($number, $message, $file, $line, $context);
@@ -14,6 +23,7 @@ function api_error_handler(int $number, string $message, string|null $file = nul
 
     return true;
 }
+
 
 class Error_Handler
 {
@@ -23,7 +33,17 @@ class Error_Handler
     private int|null $line = null;
     private array|null $context = null;
 
-    public function __construct(int $number, string $message, string|null $file = null, int|null $line = null, array|null $context = null)
+    /**
+     * Constructor of the error handler that has been generated, which is responsible for collecting all
+     * the information that PHP gives us about the errors that occur.
+     * @param int $number
+     * @param string $message
+     * @param string|null $file
+     * @param int|null $line
+     * @param array|null $context
+     */
+    public function __construct(int $number, string $message, string|null $file = null, int|null $line = null,
+                                array|null $context = null)
     {
         $this->setNumber($number);
         $this->setMessage($message);
@@ -32,7 +52,7 @@ class Error_Handler
         $this->setContext($context);
     }
 
-    public function setError()
+    public function setError(): void
     {
         global $CONFIG;
         if($CONFIG['project']['debug'] === true) {
@@ -68,10 +88,10 @@ class Error_Handler
                 print json_encode($result);
                 exit();
             default:
-                if(E_WARNING == $this->number) {
+                if(E_WARNING === $this->number) {
 
                     $type = "WARNING";
-                } elseif(E_NOTICE == $this->number) {
+                } elseif(E_NOTICE === $this->number) {
 
                     $type = "NOTICE";
                 } else {
@@ -91,23 +111,24 @@ class Error_Handler
 
     /**
      * Configures the result that will be obtained from the endpoint.
-     * @param $code
+     * @param int $code
      * @param array $contents
      * @return endpoint_result
      */
-    private function setResult($code, array $contents = array()): endpoint_result
+    private function setResult(int $code, array $contents = array()): endpoint_result
     {
         $result = new endpoint_result($code);
 
         foreach ($contents as $key => $content) {
 
-            $result->setRequest($key, $content);
+            $result->setResponse($key, $content);
         }
 
         return $result;
     }
 
     /**
+     * Returns the number or type of error that occurred.
      * @return int
      */
     public function getNumber(): int
@@ -116,6 +137,7 @@ class Error_Handler
     }
 
     /**
+     * Sets the number or type of error generated.
      * @param int $number
      */
     public function setNumber(int $number): void
@@ -124,6 +146,7 @@ class Error_Handler
     }
 
     /**
+     * Returns the message that the error generated.
      * @return string
      */
     public function getMessage(): string
@@ -143,6 +166,7 @@ class Error_Handler
     }
 
     /**
+     * Configures the message that the error generated.
      * @param string $message
      */
     public function setMessage(string $message): void
@@ -151,6 +175,7 @@ class Error_Handler
     }
 
     /**
+     * Returns the file in which the error was generated
      * @return string|null
      */
     public function getFile(): ?string
@@ -159,6 +184,7 @@ class Error_Handler
     }
 
     /**
+     * Configures the file in which the error was generated.
      * @param string|null $file
      */
     public function setFile(?string $file): void
@@ -167,6 +193,7 @@ class Error_Handler
     }
 
     /**
+     * Returns the line where the error occurred.
      * @return int|null
      */
     public function getLine(): ?int
@@ -175,6 +202,7 @@ class Error_Handler
     }
 
     /**
+     * Sets the line where the error occurred.
      * @param int|null $line
      */
     public function setLine(?int $line): void
@@ -183,6 +211,7 @@ class Error_Handler
     }
 
     /**
+     * Returns the context in which the error was generated.
      * @return array|null
      */
     public function getContext(): ?array
@@ -191,6 +220,7 @@ class Error_Handler
     }
 
     /**
+     * Sets the context in which the error was generated.
      * @param array|null $context
      */
     public function setContext(?array $context): void

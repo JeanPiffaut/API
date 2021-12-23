@@ -10,6 +10,7 @@ global $CONFIG;
 // Configure API access methods
 header("Access-Control-Allow-Methods: " . implode($CONFIG['access']['methods']));
 
+// Configure the error handler with the internal API function
 set_error_handler("Directory\api_error_handler", E_ALL);
 
 // Validates if the called endpoint was sent.

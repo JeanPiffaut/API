@@ -15,9 +15,6 @@ class product extends EndPoint
         }
     }
 
-    /**
-     * @return endpoint_result
-     */
     public function post(): endpoint_result
     {
         $this->setResult(200, array("ads" => $this->name));
