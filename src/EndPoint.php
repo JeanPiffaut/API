@@ -83,6 +83,8 @@ abstract class EndPoint implements iEndPoint
 
             $this->result->setRequest($key, $content);
         }
+
+        $this->result->setHandlerResult();
     }
 
     /**

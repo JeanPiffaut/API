@@ -8,7 +8,7 @@ class home extends EndPoint
 
     public function get(): endpoint_result
     {
-        $this->setResult(200, array("poto" => $this->poto));
+        $this->setResult(200, array("poto" => ""));
         return $this->getResult();
     }
 
