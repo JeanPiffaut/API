@@ -8,6 +8,10 @@ abstract class EndPoint implements iEndPoint
 {
     protected endpoint_result $result;
 
+    /**
+     * Configure the sent parameters by traversing them and using the setEndPointParams function on each one.
+     * @param array $params
+     */
     public function setParams(array $params): void
     {
         foreach ($params as $key => $value) {
@@ -81,7 +85,7 @@ abstract class EndPoint implements iEndPoint
 
         foreach ($contents as $key => $content) {
 
-            $this->result->setRequest($key, $content);
+            $this->result->setResponse($key, $content);
         }
 
         $this->result->setHandlerResult();
@@ -97,7 +101,17 @@ abstract class EndPoint implements iEndPoint
     }
 }
 
+/**
+ * This interface provides all the necessary functions for the correct operation of any Endpoint,
+ * generating fatal errors in case it is not configured.
+ */
 interface iEndPoint
 {
+    /**
+     * It is responsible for configuring the parameters received using the corresponding functions so that they
+     * can be validated and/or formatted as required.
+     * @param string $name
+     * @param mixed $value
+     */
     public function setEndPointParams(string $name, mixed $value): void;
 }
